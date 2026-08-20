@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asad | Portfolio</title>
+
+    <style>
+        /* ---- SMOOTH SCROLL ---- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ---- RESET & BASE (Light Mode Only) ---- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ---- THE CLASSIC WATER (Sits under everything) ---- */
+        #cursor-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            will-change: background;
+            filter: blur(12px);
+        }
+
+        /* ---- CONTAINER (sits ON TOP of the water) ---- */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- GLASSMORPHISM (Always Light & Airy) ---- */
+        .glass {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ============================================================
+                   THE ARTISTIC HERO (No Images, Pure Gradient Art)
+                ============================================================ */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 30px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            transform-style: preserve-3d;
+            perspective: 800px;
+            transition: transform 0.1s ease;
+
+            /* 
+                🎨 ARTISTIC GRADIENT BACKGROUND (No images needed!)
+                This creates a beautiful, premium color flow that looks like a digital painting.
+            */
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe, #a5b4fc, #818cf8);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease-in-out infinite;
+        }
+
+        /* Smooth, living gradient animation */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Override glass for hero to make the gradient visible */
+        #hero.glass {
+            background: rgba(255, 255, 255, 0.20);
+            backdrop-filter: blur(12px) saturate(150%);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Re-apply the gradient animation on top of the glass */
+        #hero.glass::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe, #a5b4fc, #818cf8);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease-in-out infinite;
+            z-index: -1;
+            border-radius: 24px;
+            opacity: 0.6;
+        }
+
+        /* ---- FUTURISTIC DOT GRID ---- */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, #007aff 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ---- FLOATING GLASS RINGS ---- */
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 122, 255, 0.15);
+            pointer-events: none;
+            z-index: 0;
+            animation: ringFloat 8s ease-in-out infinite alternate;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .ring-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+            animation-duration: 10s;
+            border-width: 2px;
+        }
+
+        .ring-2 {
+            width: 250px;
+            height: 250px;
+            bottom: -50px;
+            left: -50px;
+            animation-duration: 12s;
+            animation-direction: alternate-reverse;
+            border-width: 1.5px;
+        }
+
+        .ring-3 {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            left: 10%;
+            animation-duration: 7s;
+            border-width: 1px;
+            opacity: 0.5;
+        }
+
+        @keyframes ringFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            100% {
+                transform: translate(30px, -30px) rotate(45deg) scale(1.05);
+            }
+        }
+
+        /* ---- HERO CONTENT ---- */
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-name {
+            font-size: 92px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, #007aff, #5856d6, #64d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 80px rgba(0, 122, 255, 0.15);
+            margin-bottom: 16px;
+            line-height: 1;
+            animation: textGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 40px rgba(0, 122, 255, 0.1);
+            }
+            100% {
+                text-shadow: 0 0 80px rgba(88, 86, 214, 0.25), 0 0 120px rgba(0, 212, 255, 0.1);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 10px;
+            color: #1d1d1f;
+        }
+
+        /* ---- SCROLL INDICATOR ---- */
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.3;
+            transition: opacity 0.4s ease;
+            animation: bounceDown 2s ease-in-out infinite;
+            color: #1d1d1f;
+        }
+
+        .scroll-hint:hover {
+            opacity: 0.7;
+        }
+
+        .scroll-hint span {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .scroll-hint .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, #1d1d1f, transparent);
+        }
+
+        @keyframes bounceDown {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(8px);
+            }
+        }
+
+        /* ============================================================
+                   NAVIGATION HEADER
+                ============================================================ */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 28px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1d1d1f;
+            font-weight: 500;
+            font-size: 16px;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* ============================================================
+                   SECTION TITLES
+                ============================================================ */
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin: 60px 0 30px 0;
+            color: #1d1d1f;
+        }
+
+        .section-title span {
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============================================================
+                   PROJECTS (Text Cards)
+                ============================================================ */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin-bottom: 20px;
+        }
+
+        .project-card {
+            padding: 30px 24px;
+            cursor: default;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.3s ease;
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+
+        .project-card p {
+            font-size: 15px;
+            opacity: 0.7;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(0, 122, 255, 0.15);
+            color: #007aff;
+            font-weight: 600;
+            font-size: 12px;
+            padding: 4px 14px;
+            border-radius: 100px;
+        }
+
+        /* ============================================================
+                   CONTACT FORM
+                ============================================================ */
+        .contact-form {
+            padding: 40px 35px;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 16px 18px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            font-size: 16px;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            color: #1d1d1f;
+            transition: border 0.2s ease, box-shadow 0.2s ease;
+            outline: none;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #007aff;
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15);
+        }
+
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background: #007aff;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 17px;
+            padding: 14px 0;
+            width: 100%;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.25);
+        }
+
+        .contact-form button:hover {
+            transform: scale(1.02);
+            background: #0066d9;
+        }
+
+        .form-hint {
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.5;
+            margin-top: 16px;
+        }
+
+        /* ============================================================
+                   FOOTER
+                ============================================================ */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 0 10px;
+            opacity: 0.5;
+            font-size: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            color: #1d1d1f;
+        }
+
+        /* ============================================================
+                   RESPONSIVE (Mobile Friendly)
+                ============================================================ */
+        @media (max-width: 650px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+            }
+            header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                padding: 18px 20px;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 18px;
+            }
+            #hero {
+                min-height: 90vh;
+                padding: 30px 20px;
+                border-radius: 16px;
+            }
+            .hero-name {
+                font-size: 48px;
+            }
+            .hero-subtitle {
+                font-size: 14px;
+                letter-spacing: 0.2em;
+            }
+            .ring-1 {
+                width: 200px;
+                height: 200px;
+                top: -50px;
+                right: -50px;
+            }
+            .ring-2 {
+                width: 150px;
+                height: 150px;
+                bottom: -30px;
+                left: -30px;
+            }
+            .ring-3 {
+                display: none;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .contact-form {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== THE CLASSIC WATER LAYER ===== -->
+    <div id="cursor-glow"></div>
+
+    <div class="container">
+
+        <!-- ============================================================
+        SECTION 1: THE ARTISTIC HERO (Pure Gradient Art, No Images)
+        ============================================================ -->
+        <section id="hero" class="glass">
+
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
+
+            <div class="hero-content">
+                <h1 class="hero-name">Asad</h1>
+                <p class="hero-subtitle">Digital Artisan · Designer · Creator</p>
+            </div>
+
+            <div class="scroll-hint">
+                <span>Scroll</span>
+                <div class="line"></div>
+            </div>
+
+        </section>
+
+        <!-- ============================================================
+        SECTION 2: NAVIGATION HEADER (Showcase removed)
+        ============================================================ -->
+        <header class="glass">
+            <div class="logo">✦ Asad</div>
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </header>
+
+        <!-- ============================================================
+        SECTION 3: PROJECTS
+        ============================================================ -->
+        <div id="projects">
+            <h2 class="section-title">My <span>Projects</span></h2>
+            <div class="project-grid">
+
+                <div class="project-card glass" data-delay="0">
+                    <h3>📱 Project Alpha</h3>
+                    <p>Describe your first project — what it does, the tech you used, or the problem it solved.</p>
+                    <span class="tag">Web App</span>
+                </div>
+
+                <div class="project-card glass" data-delay="150">
+                    <h3>🎨 Design System</h3>
+                    <p>A component library built with consistency and reusability in mind, used across 5+ products.</p>
+                    <span class="tag">Design</span>
+                </div>
+
+                <div class="project-card glass" data-delay="300">
+                    <h3>🤖 AI Assistant</h3>
+                    <p>An intelligent chatbot trained on custom data to automate customer support inquiries.</p>
+                    <span class="tag">AI</span>
+                </div>
+
+                <div class="project-card glass" data-delay="450">
+                    <h3>📊 Analytics Hub</h3>
+                    <p>Real-time dashboard with interactive charts, built for product managers to track KPIs.</p>
+                    <span class="tag">Data</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================
+        SECTION 4: CONTACT
+        ============================================================ -->
+        <h2 class="section-title" id="contact">Let's <span>Connect</span></h2>
+        <div class="contact-form glass">
+            <!-- 
+                🔥 FOR YOUR EMAIL (asadullah00114@gmail.com):
+                1. Go to https://formspree.io/ (free).
+                2. Create a form and copy your ID.
+                3. Replace "YOUR_FORM_ID_HERE" below.
+            -->
+            <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+                <input type="text" name="name" placeholder="Your name" required />
+                <input type="email" name="_replyto" placeholder="Your email" required />
+                <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+                <button type="submit">Send message</button>
+            </form>
+            <p class="form-hint">(Replace the form ID to receive emails at asadullah00114@gmail.com)</p>
+        </div>
+
+        <!-- ============================================================
+        SECTION 5: FOOTER
+        ============================================================ -->
+        <footer>
+            &copy; 2026 Asad. Designed with ♥ and art.
+        </footer>
+
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ----- 1. 3D TILT ON HERO -----
+        const hero = document.getElementById('hero');
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -3;
+            const rotateY = ((x - centerX) / centerX) * 3;
+            hero.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        hero.addEventListener('mouseleave', () => {
+            hero.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+
+        // ----- 2. STAGGERED ANIMATIONS (Projects) -----
+        const cards = document.querySelectorAll('.project-card');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        cards.forEach(card => observer.observe(card));
+
+        // ----- 3. THE CLASSIC WATER (Light Mode) -----
+        const glow = document.getElementById('cursor-glow');
+
+        let currentX = window.innerWidth / 2;
+        let currentY = window.innerHeight / 2;
+        let targetX = currentX;
+        let targetY = currentY;
+
+        document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+
+        function animateWater() {
+            currentX += (targetX - currentX) * 0.20;
+            currentY += (targetY - currentY) * 0.20;
+
+            const x = currentX;
+            const y = currentY;
+
+            const c1 = 'rgba(0, 212, 255, 0.15)';
+            const c2 = 'rgba(124, 106, 255, 0.10)';
+            const c3 = 'rgba(0, 122, 255, 0.08)';
+
+            glow.style.background = `
+                        radial-gradient(circle 180px at ${x}px ${y}px, ${c1} 0%, transparent 70%),
+                        radial-gradient(circle 130px at ${x - 70}px ${y + 50}px, ${c2} 0%, transparent 70%),
+                        radial-gradient(circle 90px at ${x + 60}px ${y - 30}px, ${c3} 0%, transparent 70%)
+                    `;
+
+            requestAnimationFrame(animateWater);
+        }
+
+        animateWater();
+    </script>
+
+</body>
+</html>
